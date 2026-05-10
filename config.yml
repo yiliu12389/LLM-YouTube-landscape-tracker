@@ -1,0 +1,71 @@
+# yt-worker config — polls AI/ML YouTube channels for new videos,
+# filters by relevance keywords, fetches transcripts, and summarizes via OpenClaw.
+
+poll_interval_minutes: 30
+max_new_per_run: 10
+max_keep: 20
+
+channels:
+  - name: "Yannic Kilcher"
+    channel_id: "UCZHmQk67mSJgfCCTn7xBfew"
+  - name: "Two Minute Papers"
+    channel_id: "UCbfYPyITQ-7l4upoX8nvctg"
+  - name: "3Blue1Brown"
+    channel_id: "UCYO_jab_esuFRV4b17AJtAw"
+  - name: "Lex Fridman"
+    channel_id: "UC7c3Kb6jYCRj4JOHHZTxKsQ"
+  - name: "Andrew Ng"
+    channel_id: "UC0nw93YVMDAuABkfDexpF2Q"
+  - name: "DeepLearning.AI"
+    channel_id: "UCcIXc5mJsHVYTZR1maL5l9w"
+  - name: "Machine Learning Street Talk"
+    channel_id: "UCMLtBahI5DMrt0NPvDSoIRQ"
+  - name: "Google DeepMind"
+    channel_id: "UCP7jMXSY2xbc3KCAE0MHQ-A"
+  - name: "OpenAI"
+    channel_id: "UCXZCJLdBC09xxGZ6gcdrc6A"
+  - name: "AI Explained"
+    channel_id: "UCv83tO5cePwHMt1952IVVHw"
+  - name: "Andrej Karpathy"
+    channel_id: "UCXUPKJO5MZQN11PqgIvyuvQ"
+
+relevance_keywords:
+  - "large language model"
+  - "LLM"
+  - "GPT"
+  - "transformer"
+  - "chatgpt"
+  - "openai"
+  - "machine learning"
+  - "deep learning"
+  - "neural network"
+  - "AI"
+
+storage:
+  db_path: "data/state.db"
+  out_dir: "out"
+
+openclaw:
+  mode: "cli"
+  timeout_seconds: 180
+  summarize_prompt: |
+    Summarize the following YouTube video transcript concisely. Include:
+    1. Identify the main speaker (name or channel host)
+    2. Extract 3-5 keywords
+    3. How does this channel relate to other channels in the dataset on LLM themes? For example: does it cover similar topics from a different angle, fill a gap, offer unique perspective, or compete directly? Be specific and name channels.
+    4. Give summary under 300 words.
+
+    Respond **only** in JSON like:
+    {{
+      "speaker": "Name of main speaker",
+      "keywords": ["keyword1", "keyword2", "keyword3"],
+      "related": "This channel focuses on X, while Yannic Kilcher covers paper deep-dives on similar topics. It complements 3Blue1Brown's visual explanations with...",
+      "summary": "..."
+    }}
+
+    Title: {title}
+    Channel: {channel}
+    URL: {url}
+
+    Transcript:
+    {transcript}
