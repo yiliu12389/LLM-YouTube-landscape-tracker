@@ -126,5 +126,10 @@ rm data/state.db && ./run.sh --poll
 ```
 ## Image
 
-webpage.jpg
-terminal log.png
+### Web Interface
+![Web Interface](webpage.jpg)  
+Screenshot of the Flask dashboard displaying video statistics and filters.
+
+### Terminal Log
+![Terminal Log](terminal log.png)  
+Example terminal output showing video polling, subtitle extraction, and summary generation.
