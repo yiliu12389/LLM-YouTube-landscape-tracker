@@ -126,5 +126,5 @@ rm data/state.db && ./run.sh --poll
 ```
 ## Image
 
-webpage webpage.png
-terminal log:terminal log.jpg
+webpage.jpg
+terminal log.png
