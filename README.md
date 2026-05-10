@@ -124,3 +124,7 @@ rm data/state.db && ./run.sh --poll
 └── data/
     └── state.db       # SQLite database
 ```
+## Image
+
+webpage webpage.png
+terminal log:terminal log.jpg
